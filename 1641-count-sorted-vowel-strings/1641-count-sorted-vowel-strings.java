@@ -12,10 +12,7 @@ class Solution {
         int pickCurChar = dp(n, i+1, memo);
         int skipCurChar = dp(n-1, i, memo);
         int ans = pickCurChar + skipCurChar;
-        return memo[n][i] = ans;
-//         int ans = dp(n, i+1, memo); // Skip vowels[i]
-//         ans += dp(n-1, i, memo); // Include vowels[i]
-        
-//         return memo[n][i] = ans;
+        memo[n][i] = ans;
+        return memo[n][i];
     }
 }
