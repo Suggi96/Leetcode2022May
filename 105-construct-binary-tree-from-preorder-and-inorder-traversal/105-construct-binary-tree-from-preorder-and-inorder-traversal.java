@@ -24,7 +24,7 @@ class Solution {
         int curValue = preorder[preIndex[0]];
         TreeNode curNode = new TreeNode(curValue);
         preIndex[0] += 1;
-        //finding index of curValue in Inorder Array and then set boundary
+        //finding index of curValue in Inorder Array and then set boundary for left and right subtree using i during recursion
         int i=-1;
         for(i=inStart;i<=inEnd;i++) {
             if(curValue==inorder[i])
