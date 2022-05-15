@@ -7,7 +7,6 @@ class Solution {
             String s1 = words[top];
             String s2 = words[i];
             if(isEqual(s1, s2)) {
-            //    System.out.println("yes");
                 continue;
             }
                 
