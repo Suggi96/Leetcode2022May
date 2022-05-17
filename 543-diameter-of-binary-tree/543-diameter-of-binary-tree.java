@@ -15,7 +15,7 @@
  */
 class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
-        int dia[] = {-1};
+        int[] dia = {-1};
         dfs(root, dia);
         return dia[0];
     }
