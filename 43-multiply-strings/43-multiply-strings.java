@@ -4,7 +4,7 @@ class Solution {
             return "0";
         if(num1.equals("1"))
             return num2;
-        if(num2.equals("0"))
+        if(num2.equals("1"))
             return num1;
         
         int m = num1.length();
