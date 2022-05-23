@@ -5,7 +5,7 @@ class Solution {
     private int helper(String[] strs, int zero, int one, int index, HashMap<String, Integer> memo) {
         if(index==strs.length || zero+one==0)
             return 0;
-        String key = zero + "" + "-" + "" + one + "-" + "" + index;
+        String key = zero + "-" + one + "-" + index;
         if(memo.containsKey(key))
             return memo.get(key);
         int[] count = countZO(strs[index]);
