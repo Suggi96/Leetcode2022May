@@ -1,4 +1,5 @@
 class Solution {
+    int count = 0;
     public int totalNQueens(int n) {
         char[][] board = new char[n][n];
         for(int i=0;i<n;i++) {
@@ -6,20 +7,20 @@ class Solution {
                 board[i][j] = '.';
             }
         }
-        List<List<String>> answer = new ArrayList<>();
-        solveQueen(board, 0, n, answer);
-        return answer.size();
+       // List<List<String>> answer = new ArrayList<>();
+        solveQueen(board, 0, n);
+        return count;
     }
-    private void solveQueen(char[][] board, int curRow, int n, List<List<String>> answer) {
+    private void solveQueen(char[][] board, int curRow, int n) {
         if(curRow==n) {
-            answer.add(genString(board, n));
+            count++;
             return;
         }
         //travel board columnwise and call recursively row+1
         for(int i=0;i<n;i++) {
             if(isValid(board, curRow, i, n)) {
                 board[curRow][i] = 'Q';
-                solveQueen(board, curRow+1, n, answer);
+                solveQueen(board, curRow+1, n);
                 board[curRow][i] = '.';
             }
         }
@@ -64,15 +65,4 @@ class Solution {
         return true;
     }
     
-    private List<String> genString(char[][] board, int n) {
-        List<String> list = new ArrayList<>();
-        for(int i=0;i<n;i++) {
-            String s = "";
-            for(int j=0;j<n;j++) {
-                s += board[i][j];
-            }
-            list.add(s);
-        }
-        return list;
-    }
 }
