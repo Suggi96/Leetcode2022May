@@ -1,25 +1,33 @@
 class Solution {
     public int maxProduct(String[] words) {
-        int maxi = 0;
-        for(int i=0;i<words.length;i++) {
-            for(int j=i+1;j<words.length;j++) {
-                if(isUnequal(words[i], words[j])) {
-                    int len = words[i].length() * words[j].length();
-                    maxi = Math.max(maxi, len);
+        int len = words.length;
+        int[] state = new int[len];
+
+
+        for (int i=0;i<len;i++) {
+
+            state[i] = getStateFromString(words[i]);
+
+        }
+
+        int maxProduct = 0;
+        for (int i = 0; i < len; i++)
+            for (int j = i + 1; j < len; j++) {
+                if ((state[i] & state[j]) == 0) {
+                    if(words[i].length() * words[j].length() > maxProduct) {
+                        maxProduct = words[i].length() * words[j].length();
+                    }
                 }
             }
-        }
-        return maxi;
+        return maxProduct;
     }
-    private boolean isUnequal(String s, String t) {
-        char[] arr1 = s.toCharArray();
-        char[] arr2 = t.toCharArray();
-        for(int i=0;i<arr1.length;i++) {
-            for(int j=0;j<arr2.length;j++) {
-                if(arr1[i]==arr2[j])
-                    return false;
-            }
+
+    private int getStateFromString(String s){
+        int state = 0;
+        for(char c: s.toCharArray()){
+            int index = c  -'a';
+            state |= 1 << (index);
         }
-        return true;
+        return state;
+        }
     }
-}
