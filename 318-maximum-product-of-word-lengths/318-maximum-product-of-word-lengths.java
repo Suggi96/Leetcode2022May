@@ -1,33 +1,26 @@
 class Solution {
     public int maxProduct(String[] words) {
         int len = words.length;
-        int[] state = new int[len];
-
-
-        for (int i=0;i<len;i++) {
-
-            state[i] = getStateFromString(words[i]);
-
+        int[] states = new int[len];
+        for(int i=0;i<len;i++) {
+            states[i] = toBin(words[i]);
         }
-
-        int maxProduct = 0;
-        for (int i = 0; i < len; i++)
-            for (int j = i + 1; j < len; j++) {
-                if ((state[i] & state[j]) == 0) {
-                    if(words[i].length() * words[j].length() > maxProduct) {
-                        maxProduct = words[i].length() * words[j].length();
-                    }
+        int maxi = 0;
+        for(int i=0;i<len;i++) {
+            for(int j=i+1;j<len;j++) {
+                if((states[i] & states[j])==0) {
+                    maxi = Math.max(maxi, words[i].length() * words[j].length());
                 }
             }
-        return maxProduct;
+        }
+        return maxi;
     }
-
-    private int getStateFromString(String s){
+    private int toBin(String s) {
         int state = 0;
-        for(char c: s.toCharArray()){
-            int index = c  -'a';
-            state |= 1 << (index);
+        for(char c: s.toCharArray()) {
+            int index = c-'a';
+            state |= (1<<index);
         }
         return state;
-        }
     }
+}
