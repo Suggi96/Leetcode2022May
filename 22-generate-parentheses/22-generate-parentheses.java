@@ -5,7 +5,7 @@ class Solution {
         return ans;
     }
     private void findAllComb(int opc, int cpc, String s, int n, List<String> ans) {
-        if(opc==cpc && opc==n) {
+        if(opc+cpc==2*n) {
             ans.add(s);
             return;
         }
