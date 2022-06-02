@@ -13,7 +13,7 @@ class Solution {
             findAllComb(opc+1, cpc, s + "(", n, ans);
         }
         
-        if(opc>cpc) {
+        if(cpc<opc) {
             findAllComb(opc, cpc+1, s + ")", n, ans);
         }
         return;
