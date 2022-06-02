@@ -1,33 +1,28 @@
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         Set<List<Integer>> set = new HashSet<>();
-        dfs(nums, 0, set);
-        List<List<Integer>> res = new ArrayList<>();
+        int n = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        boolean[] visited = new boolean[n];
+        backTrack(nums, visited, new ArrayList<>(), set);
         for(List<Integer> l: set) {
-            res.add(l);
+            ans.add(l);
         }
-        return res;
+        return ans;
     }
-    private void dfs(int[] nums, int start, Set<List<Integer>> set) {
-        if(start==nums.length) {
-            set.add(addArray(nums));
+    private void backTrack(int[] nums, boolean[] visited, List<Integer> curSubList, Set<List<Integer>> set) {
+        if(curSubList.size()==nums.length) {
+            set.add(new ArrayList<>(curSubList));
+            return;
         }
-        for(int i=start;i<nums.length;i++) {
-            swap(nums, i, start);
-            dfs(nums, start+1, set);
-            swap(nums, i, start); //backtracking step
+        for(int i=0;i<nums.length;i++) {
+            if(visited[i]==false) {
+                curSubList.add(nums[i]);
+                visited[i] = true;
+                backTrack(nums, visited, curSubList, set);
+                visited[i] = false;
+                curSubList.remove(curSubList.size()-1);
+            }
         }
-    }
-    private List<Integer> addArray(int[] arr) {
-        List<Integer> list = new ArrayList<>();
-        for(int i: arr)
-            list.add(i);
-        return list;
-    }
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-        return;
     }
 }
