@@ -28,7 +28,7 @@ class Solution {
                     if(start!=head)
                         map.remove(sum);
                 }
-                map.get(prefixSum).next = head.next;
+                map.get(prefixSum).next = head.next; //connect next node of prefix sum to next node of head in current iteration
             }
             else {
                 map.put(prefixSum, head);
