@@ -1,20 +1,23 @@
 class Solution {
     public int minOperations(int[] nums, int x) {
-        int target = -x;
-        for(int i: nums)
-            target += i;
-        if(target==0) return nums.length;
-        if(target<0) return -1;
-        int res = -1, sum = 0, left = 0;
-        for(int i=0;i<nums.length;i++) {
+        int n = nums.length, res = Integer.MIN_VALUE, target = 0, sum = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1); //to handle corner case
+        for(int i=0;i<n;i++) {
             sum += nums[i];
-            while(sum>target) {
-                sum -= nums[left];
-                left++;
-            }
-            if(sum==target)
-                res = Math.max(res, i-left+1);
+            map.put(sum, i);
         }
-        return res==-1 ? -1:nums.length-res;
+            
+        target = sum - x;
+        if(target<0) return -1;
+        if(target==sum) return n;
+        //find longest subarray of sum which is equal to prefixSum - target
+        sum = 0;
+        for(int i=0;i<n;i++) {
+            sum += nums[i];
+            if(map.containsKey(sum-target))
+                res = Math.max(res, i-map.get(sum-target));
+        }
+        return res==Integer.MIN_VALUE? -1:n-res;
     }
 }
