@@ -63,8 +63,6 @@ class Solution {
             }
         }
 
-        if(visitedNodes!=V)
-            return true;
-        return false;
+        return visitedNodes!=V;
     }
 }
