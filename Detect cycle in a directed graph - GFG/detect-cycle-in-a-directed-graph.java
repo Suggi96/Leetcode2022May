@@ -34,28 +34,42 @@ class Solution {
     // Function to detect cycle in a directed graph.
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
         // code here
+        int[] indegree = new int[V];
         boolean[] visited = new boolean[V];
-        Set<Integer> set = new HashSet<>();
-        for(int curVertex=0; curVertex<V; curVertex++) {
-            if(visited[curVertex]==false && hasCycle(adj, curVertex, visited, set))
-            return true;
+        Queue<Integer> q = new LinkedList<>();
+        for(int i=0;i<V;i++) {
+            for(int node: adj.get(i))
+                indegree[node]+=1;
         }
-        return false;
-    }
-    private boolean hasCycle(ArrayList<ArrayList<Integer>> adj, int curVertex, boolean[] visited, Set<Integer> set) {
-        visited[curVertex] = true;
-        set.add(curVertex);
-        
-        ArrayList<Integer> neigh = adj.get(curVertex);
-        for(int curNeigh: neigh) {
-            if(visited[curNeigh]==false && hasCycle(adj, curNeigh, visited, set))
-                return true;
+        // for(int i=0;i<V;i++)
+        //     System.out.println(i+" "+indegree[i]);
             
-            if(set.contains(curNeigh))
-                return true;
+        int visitedNodes = 0;
+        for(int i=0;i<V;i++) {
+            if(indegree[i]==0)
+                q.add(i);
         }
-        set.remove(curVertex);
+                
+        while(!q.isEmpty()) {
+            int curVertex = q.remove();
+            if(visited[curVertex])
+                continue;
+            
+            visited[curVertex] = true;
+            visitedNodes++;
+            for(int curNode: adj.get(curVertex)) {
+                indegree[curNode] -= 1;
+                
+                if(indegree[curNode]==0)
+                    q.add(curNode);
+            }
+        }
+     //   System.out.println(visitedNodes);
+        // for(boolean flag: visited) {
+        //     System.out.println(flag);
+        // }
+        if(visitedNodes!=V)
+            return true;
         return false;
-        
     }
 }
