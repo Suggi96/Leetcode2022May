@@ -41,9 +41,7 @@ class Solution {
             for(int node: adj.get(i))
                 indegree[node]+=1;
         }
-        // for(int i=0;i<V;i++)
-        //     System.out.println(i+" "+indegree[i]);
-            
+
         int visitedNodes = 0;
         for(int i=0;i<V;i++) {
             if(indegree[i]==0)
@@ -64,10 +62,7 @@ class Solution {
                     q.add(curNode);
             }
         }
-     //   System.out.println(visitedNodes);
-        // for(boolean flag: visited) {
-        //     System.out.println(flag);
-        // }
+
         if(visitedNodes!=V)
             return true;
         return false;
