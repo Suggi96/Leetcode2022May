@@ -1,7 +1,6 @@
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
-        Map<String, Integer> memo = new HashMap<>();
-        return helper(triangle, 0, 0, triangle.size(), memo);
+        return helper(triangle, 0, 0, triangle.size(), new HashMap<>());
     }
     private int helper(List<List<Integer>> triangle, int r, int c, int rows, Map<String, Integer> memo) {
         if(r>=rows)
