@@ -54,9 +54,6 @@ class Solution {
             else if(curNeigh!=curParent) { //cycle is present
                 return true;
             }
-            else {
-                continue;
-            }
         }
         return false; //cycle not present
     }
