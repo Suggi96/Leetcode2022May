@@ -1,38 +1,29 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-             ArrayList<ArrayList<Integer>> graph = buildGraph(prerequisites, numCourses);
-        int[] indegree = new int[numCourses];
-        for(int i=0;i<numCourses;i++) {
-            for(int curNeigh: graph.get(i)) {
-                indegree[curNeigh] +=1;
-            }
-        }
-        Queue<Integer> q = new LinkedList<>();
-        List<Integer> order = new ArrayList<>();
-        for(int i=0;i<indegree.length;i++)
-            if(indegree[i]==0)
-                q.add(i);
+        ArrayList<ArrayList<Integer>> graph = buildGraph(prerequisites, numCourses);
         boolean[] visited = new boolean[numCourses];
-        while(!q.isEmpty()) {
-            int curCourse = q.remove();
-            if(visited[curCourse]==true)
-                continue;
-            
-            visited[curCourse] = true;
-            order.add(curCourse);
-            
-            for(int curNeigh: graph.get(curCourse)) {
-                indegree[curNeigh] -= 1;
-                
-                if(indegree[curNeigh]==0)
-                    q.add(curNeigh);
-            }
+        Set<Integer> set = new HashSet<>();
+        for(int curVertex=0; curVertex<numCourses; curVertex++) {
+            if(visited[curVertex]==false && dfs(graph, curVertex, visited, set))
+            return false;
         }
+        return true;
         
-        if(order.size()==numCourses)
-            return true;
+    }
+    private boolean dfs(ArrayList<ArrayList<Integer>> adj, int curVertex, boolean[] visited, Set<Integer> set) {
+        visited[curVertex] = true;
+        set.add(curVertex);
+        
+        ArrayList<Integer> neigh = adj.get(curVertex);
+        for(int curNeigh: neigh) {
+            if(visited[curNeigh]==false && dfs(adj, curNeigh, visited, set))
+                return true;
+            
+            if(set.contains(curNeigh))
+                return true;
+        }
+        set.remove(curVertex);
         return false;
-        
     }
         private ArrayList<ArrayList<Integer>> buildGraph(int[][] prerequisites, int numCourses) {
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
