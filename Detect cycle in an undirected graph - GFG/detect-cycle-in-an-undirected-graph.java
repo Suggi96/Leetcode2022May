@@ -45,8 +45,8 @@ class Solution {
     }
     private boolean dfs(ArrayList<ArrayList<Integer>> adj, int curVertex, int curParent, boolean[] visited) {
         visited[curVertex] = true;
-        
-        for(int curNeigh: adj.get(curVertex)) {
+        ArrayList<Integer> list = adj.get(curVertex);
+        for(int curNeigh: list) {
             if(visited[curNeigh]==false) {
                 if(dfs(adj, curNeigh, curVertex, visited))
                     return true;
