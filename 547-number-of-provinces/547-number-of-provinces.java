@@ -26,7 +26,5 @@ class Solution {
                   q.add(i);
           }
       }
-        
     }
-    
 }
