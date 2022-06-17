@@ -14,6 +14,7 @@ class Solution {
     private void bfs(int[][] isConnected, int curVertex, boolean[] visited) {
       Queue<Integer> q = new LinkedList<>();
       q.add(curVertex);
+      visited[curVertex] = true;
       while(!q.isEmpty()) {
           int curNode = q.remove();
           visited[curNode] = true;
