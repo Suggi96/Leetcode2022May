@@ -44,12 +44,15 @@ class Solution {
         return count;
     }
     private static void dfs(ArrayList<ArrayList<Integer>> adj, int curVertex, boolean[] visited) {
-        for(int j=0;j<adj.size();j++) {
-            if(curVertex!=j && visited[j]==false && adj.get(curVertex).get(j)==1) {
-                visited[j] = true;
-                dfs(adj, j, visited);
-            }
-                
+        if(visited[curVertex])
+            return;
+        
+        visited[curVertex] = true;
+        ArrayList<Integer> neigh = adj.get(curVertex);
+        for(int i=0;i<neigh.size();i++) {
+            if(neigh.get(i)==1)
+                dfs(adj, i, visited);
         }
+        return;
     }
 };
