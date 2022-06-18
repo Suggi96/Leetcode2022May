@@ -16,7 +16,9 @@ class WordFilter {
     
     public int f(String prefix, String suffix) {
         String queryString = prefix + "#" + suffix;
-        return map.getOrDefault(queryString, -1);
+        if(map.containsKey(queryString))
+            return map.get(queryString);
+        return -1;
     }
 }
 
