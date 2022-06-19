@@ -1,34 +1,31 @@
 class Solution {
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
-        List<List<String>> ans = new ArrayList<>();
+       List<List<String>> res = new ArrayList<>();
+        
         Arrays.sort(products);
-        //<ProductWord, Sorted ID>
-        TreeMap<String, Integer> map = new TreeMap<>();
-        int i = 0;
-        for(String product: products) {
-            map.put(product, i++);
+        
+        for(int i=0; i<searchWord.length(); i++){
+            
+            int k=0;
+            
+            String sub = searchWord.substring(0,i+1);
+            
+            List<String> temp = new ArrayList<>();
+            
+            for(String prod : products){
+                
+                if(k==3) break;
+                
+                if(prod.startsWith(sub)){
+                    temp.add(prod);
+                    k++;
+                }
+            }
+            
+            res.add(temp);
+            
         }
         
-        //ceiling(x) is >=x  lower bound
-        //floor(x) is <=x  upperbound
-        List<String> productList = Arrays.asList(products);
-        String key = "";
-        for(char c: searchWord.toCharArray()) {
-            key += c;
-            String ceiling = map.ceilingKey(key); // lowerbound ie find first word matching key
-            String floor = map.floorKey(key + "{"); //uperBound ie find last word match key + { as ASCII value of { is 123 and z is 122
-            
-            if(ceiling==null || floor==null) break; //word itself not found
-            
-            
-            int start = map.get(ceiling);
-            int end = Math.min(map.get(ceiling) + 3, map.get(floor) + 1);
-            List<String> temp = productList.subList(start, end);
-            ans.add(temp);
-        }
-        while(ans.size() < searchWord.length())
-            ans.add(new ArrayList<>());
-        
-        return ans;
+        return res;
     }
 }
