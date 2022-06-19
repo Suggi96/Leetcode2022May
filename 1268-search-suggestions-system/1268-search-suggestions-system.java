@@ -16,7 +16,7 @@ class Solution {
         for(char c: searchWord.toCharArray()) {
             key += c;
             String ceiling = map.ceilingKey(key); // lowerbound ie find first word matching key
-            String floor = map.floorKey(key + "{");
+            String floor = map.floorKey(key + "{"); //uperBound ie find last word match key + { as ASCII value of { is 123 and z is 122
             
             if(ceiling==null || floor==null) break; //word itself not found
             
