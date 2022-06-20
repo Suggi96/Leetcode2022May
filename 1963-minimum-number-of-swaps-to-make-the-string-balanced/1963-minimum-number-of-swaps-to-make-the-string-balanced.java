@@ -8,6 +8,9 @@ class Solution {
                 extra--;
             maxi = Math.max(maxi, extra);
         }
-        return (maxi + 1)/2;
+        if(maxi%2==0)
+            return maxi/2;
+        else
+            return (maxi+1)/2;
     }
 }
