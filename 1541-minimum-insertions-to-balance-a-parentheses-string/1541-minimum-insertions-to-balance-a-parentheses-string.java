@@ -1,21 +1,24 @@
 class Solution {
     public int minInsertions(String s) {
-        int right = 0, res = 0;
-        for(int i = 0; i < s.length(); i++){
-            if (s.charAt(i) == '(') {
-                if (right % 2 > 0) {
-                    right--;
-                    res++;
+        int invalidCnt = 0, stSize = 0;
+        String S = s.replace("))", "}");
+        for(int i=0;i<S.length();i++) {
+            char c = S.charAt(i);
+            if(c=='(') {
+                stSize++;
+            }
+            else {
+                if(c==')') {
+                    invalidCnt++;
                 }
-                right += 2;
-            } else {
-                right--;
-                if (right < 0) {
-                    right += 2;
-                    res++;
-                }
+                if(stSize==0) { //stack is empty 
+                    invalidCnt++;
+                } 
+                else { //stack is not empty
+                    stSize--; //pop the ( from stack
+                }       
             }
         }
-        return right + res;
+        return invalidCnt + 2*stSize;
     }
 }
