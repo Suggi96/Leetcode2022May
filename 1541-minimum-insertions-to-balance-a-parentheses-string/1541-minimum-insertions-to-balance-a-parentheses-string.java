@@ -1,9 +1,9 @@
 class Solution {
     public int minInsertions(String s) {
-        int invalidCnt = 0, stSize = 0;
-        String S = s.replace("))", "}");
-        for(int i=0;i<S.length();i++) {
-            char c = S.charAt(i);
+        int stSize = 0, invalidCnt = 0;
+        s = s.replace("))", "}");
+        for(int i=0;i<s.length();i++) {
+            char c = s.charAt(i);
             if(c=='(') {
                 stSize++;
             }
@@ -11,12 +11,12 @@ class Solution {
                 if(c==')') {
                     invalidCnt++;
                 }
-                if(stSize==0) { //stack is empty 
+                if(stSize==0) {
                     invalidCnt++;
-                } 
-                else { //stack is not empty
-                    stSize--; //pop the ( from stack
-                }       
+                }
+                else {
+                    stSize--;
+                }
             }
         }
         return invalidCnt + 2*stSize;
