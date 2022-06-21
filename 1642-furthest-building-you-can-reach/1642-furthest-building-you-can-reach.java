@@ -1,26 +1,22 @@
 class Solution {
-    public int furthestBuilding(int[] height, int bricks, int ladders) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        for(int i=1;i<height.length;i++) {
-            int diff = height[i] - height[i-1];
-            if(diff>0) {
-                if(pq.size() < ladders) {
-                    pq.offer(diff);
-                }
-                else {
-                    int br = diff;
-                    //optimise ladder use
-                    if(pq.size()>0 && pq.peek() < diff) {
-                        br = pq.remove();
-                        pq.offer(diff);
-                    }
-                    if(bricks - br >=0)
-                        bricks -= br;
-                    else
-                        return i-1;
-                }
+    public int furthestBuilding(int[] heights, int bricks, int ladders) {
+       PriorityQueue<Integer> min_heap=new PriorityQueue<>();  
+          
+        for(int i=0;i<heights.length-1;i++){
+            int diff=heights[i+1]-heights[i];  // diff: difference
+            
+            if(diff>0){
+                min_heap.add(diff);
             }
-        }
-        return height.length-1;
+            
+            if(min_heap.size()>ladders){
+                bricks-=min_heap.remove();
+            }
+            
+            if(bricks<0){  //means both bricks and ladder are finished .
+                return i;
+            }
+        }  
+       return heights.length-1;
     }
 }
