@@ -5,21 +5,10 @@ class Solution {
         PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a); //maxHeap to store duration
         int time = 0;
         for(int[] course: courses) {
-            //consider if current course <= lastDay
-            if(course[0] <= course[1]) {
-                //check if current course can be completed within lastDay
-                if(course[0]+time <= course[1]) {
-                    pq.offer(course[0]);
-                    time += course[0];
-                }
-                //check if we can swap the course with highest duration to optimise our answer
-                else {
-                    if(pq.peek() > course[0]) {
-                        time -= pq.poll();
-                        pq.offer(course[0]);
-                        time += course[0];
-                    }
-                }
+           time += course[0];
+            pq.offer(course[0]);
+            if(time > course[1]) {
+                time -= pq.poll();
             }
         }
         return pq.size();
