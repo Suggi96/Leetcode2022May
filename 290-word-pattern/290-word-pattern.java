@@ -11,8 +11,8 @@ class Solution {
             char c = pattern.charAt(i);
             String w = words[i];
             
-            if(map1.containsKey(c)) {
-                if(map1.get(c).equals(w)==false) return false;
+            if(map1.containsKey(c) && map1.get(c).equals(w)==false) {
+                return false;
             }
             else {
                 if(map2.get(w)!=null && map2.get(w) != c) {
