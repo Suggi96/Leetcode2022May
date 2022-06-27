@@ -16,7 +16,7 @@ class CheckBit
     {
         // Your code here
         int bit = (n>>k) & 1;
-        return bit==1;
+        return bit==1 ? true: false;
     }
     
 }
