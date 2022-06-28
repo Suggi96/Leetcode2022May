@@ -13,18 +13,18 @@ class Solution {
         
         long res=0; 
         int prev=0;
-        int[] count = new int[1];
+        
         
         for(int v=0;v<n;v++) {
+            int[] count = new int[1];
             if(!visited[v]) {
                 dfs(graph, v, visited, count);
-                long a = n - count[0];
-                long b = count[0] - prev;
-                prev = count[0];
-                res += (a*b);
+                long remNodes = n - count[0];
+                long compNodes = count[0];
+                res += (remNodes*compNodes);
             }
         }
-        return res;
+        return res/2;
     }
     private void dfs(ArrayList<ArrayList<Integer>> graph, int curVertex, boolean[] visited, int[] nodes) {
         visited[curVertex] = true;
