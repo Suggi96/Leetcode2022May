@@ -10,7 +10,11 @@ class Solution {
             graph.get(v).add(u);
         }
         boolean[] visited = new boolean[n];
-        long res=0; int count[]={0}; int prev=0;
+        
+        long res=0; 
+        int prev=0;
+        int[] count = new int[1];
+        
         for(int v=0;v<n;v++) {
             if(!visited[v]) {
                 dfs(graph, v, visited, count);
