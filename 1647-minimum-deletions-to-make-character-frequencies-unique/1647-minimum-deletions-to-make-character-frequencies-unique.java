@@ -5,21 +5,23 @@ class Solution {
         for(char c: s.toCharArray()) {
             freq[c - 'a']++;
         }
-        Arrays.sort(freq);
-        for (int i = 0; i < n / 2; i++) { 
-           int temp = freq[i]; 
-            freq[i] = freq[n - i - 1]; 
-            freq[n - i - 1] = temp; 
-        }
-        int count = 0;
-        int f = freq[0];
-        for(int i: freq) {
-            if(i>f) {
-                if(f>0) count += (i-f);
-                else count += i;
+        int delCount = 0;
+        Set<Integer> set = new HashSet<>();
+        for(int i=0;i<26;i++) {
+            int curFreq = freq[i];
+            while(curFreq>0) {
+                if(set.contains(curFreq)) {
+                    curFreq--;
+                    delCount++;
+                }
+                else {
+                    break;
+                }
             }
-            f = Math.min(f-1, i-1);
+            
+            if(curFreq!=0)
+                set.add(curFreq);
         }
-        return count;
+        return delCount;
     }
 }
