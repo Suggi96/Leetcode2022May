@@ -7,6 +7,13 @@ class Solution {
             int index = p[1];
             list.add(index, p);
         }
-      return list.toArray(new int[list.size()][]);
+        int[][] ans = new int[list.size()][2];
+        int i = 0;
+        for(int[] arr: list) {
+            ans[i][0] = arr[0];
+            ans[i][1] = arr[1];
+            i++;
+        }
+        return ans;
     }
 }
