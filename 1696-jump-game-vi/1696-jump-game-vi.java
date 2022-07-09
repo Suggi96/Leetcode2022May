@@ -8,7 +8,7 @@ class Solution {
         pq.add(new int[] {nums[0], 0}); //add first element of nums array
         int maxScore = nums[0];
         for(int i=1;i<n;i++) {
-            while(!(i-pq.peek()[1] <= k )) {
+            while(i-pq.peek()[1] > k ) {
                 pq.poll();
             }
             int[] cur = pq.peek();
