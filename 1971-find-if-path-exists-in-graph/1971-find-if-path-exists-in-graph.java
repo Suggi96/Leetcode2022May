@@ -15,10 +15,10 @@ class Solution {
         visited[source] = true;
         List<Integer> neigh = graph.get(source);
         for(int v: neigh) {
-            if(v==dest) {
-                found = true;
-                break;
-            }
+            // if(v==dest) {
+            //     found = true;
+            //     break;
+            // }
             if(!visited[v])
                 dfs(graph, v, dest, visited);
         }
