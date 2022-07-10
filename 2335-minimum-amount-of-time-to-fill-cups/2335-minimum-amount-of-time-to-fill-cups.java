@@ -3,26 +3,17 @@ class Solution {
         int time = 0;
         PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b-a);
         for(int i: amount) {
-            if(i!=0)
                 pq.add(i);
         }
             
         
-        while(pq.size()!=0) {
-            if(pq.size()>=2) {
-                int max1 = pq.poll();
-                int max2 = pq.poll();
-                max1--;
-                max2--;
-                if(max1!=0)
-                    pq.offer(max1);
-                if(max2!=0)
-                    pq.offer(max2);
-                time++;
-            }
-            else {
-                time += pq.poll();
-            }
+        while(pq.peek()!=0) {
+            int high1 = pq.poll() - 1;
+            int high2 = pq.poll() - 1;
+            pq.offer(high1>0?high1:0);
+            pq.offer(high2>0?high2:0);
+            time++;
+
         }
         return time;
     }
