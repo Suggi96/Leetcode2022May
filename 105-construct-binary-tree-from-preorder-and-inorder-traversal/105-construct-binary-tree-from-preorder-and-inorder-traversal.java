@@ -15,24 +15,18 @@
  */
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        int[] preIndex = {0};
-        return constructTree(preorder, inorder, preIndex, 0, inorder.length-1);
+        return dfs(preorder, inorder, 0, inorder.length-1, 0);
     }
-    private TreeNode constructTree(int[] preorder, int[] inorder, int[] preIndex, int inStart, int inEnd) {
-        if(preIndex[0] >= preorder.length || inStart>inEnd)
+    private TreeNode dfs(int[] preOrder, int[] inOrder, int inStart, int inEnd, int preIdx) {
+        if(inStart>inEnd)
             return null;
-        int curValue = preorder[preIndex[0]];
-        TreeNode curNode = new TreeNode(curValue);
-        preIndex[0] += 1;
-        //finding index of curValue in Inorder Array and then set boundary for left and right subtree using i during recursion
-        int i=-1;
-        for(i=inStart;i<=inEnd;i++) {
-            if(curValue==inorder[i])
-                break;
-        }
-        curNode.left = constructTree(preorder, inorder, preIndex, inStart, i-1);
-        curNode.right = constructTree(preorder, inorder, preIndex, i+1, inEnd);
+        TreeNode root = new TreeNode(preOrder[preIdx]);
+        int inIdx = inStart;
+        while(preOrder[preIdx]!=inOrder[inIdx]) inIdx++;
         
-        return curNode;
+        root.left = dfs(preOrder, inOrder, inStart, inIdx-1, preIdx+1);
+        root.right = dfs(preOrder, inOrder, inIdx+1, inEnd, preIdx+1+inIdx-inStart);
+        
+        return root;
     }
 }
