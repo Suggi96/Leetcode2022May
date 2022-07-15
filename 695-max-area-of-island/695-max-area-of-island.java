@@ -15,13 +15,14 @@ class Solution {
         return maxArea;
     }
     private int dfs(int[][] grid, int row, int col, int m, int n) {
-        if(row<0 || row>=m || col<0 || col>=n || grid[row][col]==0)
+        if(grid[row][col]==0)
             return 0;
         grid[row][col] = 0;
         int ans = 1;
         for(int[] d: dir) {
             int newRow = row + d[0];
             int newCol = col + d[1];
+            if(newRow>=0 && newRow<m && newCol>=0 && newCol<n && grid[newRow][newCol]==1)
             ans += dfs(grid, newRow, newCol, m, n);
         }
         return ans;
