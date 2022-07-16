@@ -22,6 +22,6 @@ class Solution {
         res += dfs(m, n, maxMove-1, i, j-1);
         
         memo[i][j][maxMove] = res % mod;
-        return res % mod;
+        return memo[i][j][maxMove];
     }
 }
