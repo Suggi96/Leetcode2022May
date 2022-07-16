@@ -2,7 +2,7 @@ class Solution {
     int mod = (int)Math.pow(10,9) + 7;
     Long[][][] memo = null;
     public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
-        memo = new Long[m+1][n+1][maxMove+1];
+        memo = new Long[51][51][51];
         return (int)dfs(m,n,maxMove,startRow,startColumn);
     }
     private long dfs(int m, int n, int maxMove, int i, int j) {
