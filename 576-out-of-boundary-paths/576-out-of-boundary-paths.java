@@ -1,5 +1,5 @@
 class Solution {
-    int mod = (int)Math.pow(10,9) + 7;
+    int mod = (int)1e9 + 7 ;
     Long[][][] memo = null;
     public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
         memo = new Long[m+1][n+1][maxMove+1];
