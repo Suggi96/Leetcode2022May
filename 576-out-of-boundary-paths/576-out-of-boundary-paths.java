@@ -16,10 +16,10 @@ class Solution {
             return memo.get(key);
         
         long res = 0;
-        res += dfs(m, n, maxMove-1, i, j+1, memo)%mod;
-        res += dfs(m, n, maxMove-1, i+1, j, memo)%mod;
-        res += dfs(m, n, maxMove-1, i-1, j, memo)%mod;
-        res += dfs(m, n, maxMove-1, i, j-1, memo)%mod;
+        res += dfs(m, n, maxMove-1, i, j+1, memo);
+        res += dfs(m, n, maxMove-1, i+1, j, memo);
+        res += dfs(m, n, maxMove-1, i-1, j, memo);
+        res += dfs(m, n, maxMove-1, i, j-1, memo);
         
         memo.put(key, res%mod);
         return memo.get(key);
