@@ -3,14 +3,14 @@ class Solution {
         //digitSum, el
         HashMap<Integer, Integer> map = new HashMap<>();
         int ans = -1;
-        for(int i: nums) {
-            int sum = findSum(i);
+        for(int num: nums) {
+            int sum = findSum(num);
             if(!map.containsKey(sum)) {
-                map.put(sum, i);
+                map.put(sum, num);
             }
             else {
-                ans = Math.max(ans, map.get(sum)+i);
-                map.put(sum, Math.max(map.get(sum), i));
+                ans = Math.max(ans, map.get(sum)+num);
+                map.put(sum, Math.max(map.get(sum), num));
             }
         }
         return ans;
