@@ -10,8 +10,8 @@ class Solution {
         int count = 0;
         for(int i=s+1;i<e;i++) 
             map.put(nums[i], map.getOrDefault(nums[i], 0)+1);
-        for(Map.Entry<Integer, Integer> en: map.entrySet()) {
-            count += en.getValue();
+        for(int freq: map.values()) {
+            count += freq;
         }
         return count;
         
